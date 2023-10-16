@@ -1,7 +1,7 @@
 const Footer = ({length}) => {
     const today = new Date()
   return (
-    <footer className="w-full text-center px-1 bg-[#2f2f89] text-[aliceblue] fixed bottom-0">
+    <footer className="w-full flex flex-col items-center justify-center px-1 bg-[#2f2f89] text-[aliceblue]">
         {length===0 ?
         ""
         :

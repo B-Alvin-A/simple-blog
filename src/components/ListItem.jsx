@@ -2,7 +2,7 @@ import { FaTrashAlt } from "react-icons/fa"
 
 const ListItem = ({listItem,handleCheck,deleteItem}) => {
   return (
-    <li key={listItem.id} className="bg-gray-500 w-full text-2xl flex items-center justify-between gap-12 p-4 my-2">
+    <li className="bg-gray-500 w-full text-2xl flex items-center justify-between gap-12 p-4 my-2">
         <input 
             className="h-8 w-8"
             type="checkbox"
