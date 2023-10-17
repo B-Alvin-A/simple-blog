@@ -3,10 +3,12 @@ import Header from "./components/Header";
 import CreateItem from "./components/CreateItem";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
+import Search from "./components/Search";
 
 export default function App() {
   const [newItem,setNewItem] = useState('')
   const [items, setItems] = useState(JSON.parse(localStorage.getItem('toDoList')))
+  const [search,setSearch] = useState('')
 
   const setEdittedList = (content) => {
     setItems(content)
@@ -45,8 +47,12 @@ export default function App() {
         setNewItem={setNewItem}
         handleInput={handleInput}
       />
+      <Search 
+        search={search}
+        setSearch={setSearch}
+      />
       <Content 
-        items={items}
+        items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
         handleCheck={handleCheck}
         deleteItem={deleteItem}
       />

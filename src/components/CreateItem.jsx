@@ -3,6 +3,7 @@ import { FaPlus } from "react-icons/fa"
 const CreateItem = ({ newItem, setNewItem, handleInput }) => {
   return (
     <form className="flex justify-center items-center gap-4" onSubmit={handleInput}>
+        <label htmlFor="AddItem" className="hidden">Add Item</label>
         <input 
             className="border-2 border-gray-500 p-4"
             autoFocus
