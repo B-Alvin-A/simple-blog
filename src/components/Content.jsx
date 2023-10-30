@@ -2,7 +2,7 @@ import ItemList from "./ItemList"
 
 const Content = ({items,handleCheck,deleteItem}) => {
     return (
-    <main className="flex flex-col gap-4">
+    <>
         {items.length !== 0 ?  
         <ItemList 
             items={items}
@@ -14,7 +14,7 @@ const Content = ({items,handleCheck,deleteItem}) => {
             <h1>Your to-do list is empty</h1>
         </div>
         }
-    </main>
+    </>
   )
 }
 
