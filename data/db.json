@@ -1,0 +1,10 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Test Title 1",
+      "datetime": "16 Nov 2023 18:23:05",
+      "body": "Routing check 4"
+    }
+  ]
+}
