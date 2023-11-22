@@ -1,8 +1,14 @@
-import { useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useContext, useState, useEffect } from "react"
+import { useNavigate, useParams, Link } from "react-router-dom"
+import DataContext from "../context/DataContext";
+import { format } from "date-fns";
+import api from "../api/posts";
 
+const EditPost = () => {
+    const [editTitle, setEditTitle] = useState('')
+    const [editBody, setEditBody] = useState('')
 
-const EditPost = ({ posts, handleEdit, editTitle, editBody, setEditTitle, setEditBody }) => {
+    const { posts,setPosts } = useContext(DataContext)
     const { id } = useParams()
     const post = id ? posts.find(post => post.id.toString() === id) : null;
 
@@ -12,7 +18,25 @@ const EditPost = ({ posts, handleEdit, editTitle, editBody, setEditTitle, setEdi
             setEditBody(post.body)
         }
     },[post, setEditTitle, setEditBody])
-    
+
+    const handleEdit = async (id) =>{
+        const datetime = format(new Date(), 'd MMM yyyy H:mm:ss')
+        const updatePost = {
+          id,
+          title: editTitle,
+          datetime,
+          body: editBody
+        }
+        try {
+            const response = await api.put(`/posts/${id}`, updatePost)
+            setPosts(posts.map(post => post.id===id ? {...response.data}:post ))
+            setEditTitle('')
+            setEditBody('')
+        } catch (error) {
+          console.log(error)
+        }
+    }
+
     const navigate = useNavigate()
 
     const handlePostEdit = (e) => {
@@ -44,7 +68,19 @@ const EditPost = ({ posts, handleEdit, editTitle, editBody, setEditTitle, setEdi
                 />
                 <button type="submit" className="mt-4 border p-2 rounded-lg h-12 bg-[#d3d3d3] hover:bg-green-400">Save</button>
             </form>
-        </>}
+        </>
+        }
+        {
+            !editTitle
+            &&
+            <>
+                <h2 className="mb-4">Post Not Found</h2>
+                <p className=" text-xs mt-1">Ooops something went wrong!!</p>
+                <p className=" my-4">
+                    <Link to='/' className="underline">Go To Homepage</Link>
+                </p>
+            </>
+        }
         </main>
     )
 }

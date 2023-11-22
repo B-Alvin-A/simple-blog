@@ -1,13 +1,16 @@
 import { NavLink } from "react-router-dom"
+import { useContext } from "react"
+import DataContext from "../context/DataContext"
 
-const NavBar = ({ search,setSearch }) => {
+const NavBar = () => {
+  const { search,setSearch } = useContext(DataContext)
   return (
     <nav className="w-full bg-[#333] flex flex-col justify-start items-start">
       <form onSubmit={(e) => e.preventDefault()} className="w-[80%] pt-4 pl-3">
-        <label className="absolute left-[-99999px]">Serach Posts</label>
+        <label htmlFor="search" className="absolute left-[-99999px]">Search Posts</label>
         <input 
           className="w-full text-base p-1 rounded-sm"
-          id="serach"
+          id="search"
           type="text"
           placeholder="Search Posts..."
           value={search}
